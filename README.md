@@ -1,7 +1,7 @@
 # Instalasi dan menjalankan project di localhost:
 
 1. install angular 11.2.14
-2. git clone https://github.com/dennis2908/digimasterangularemployee
+2. git clone https://github.com/dennis2908/dennisangularideaco
 3. buka cmd dan lalu ketik yarn install dan enter
 4. setelah berhasil install, lalu ketik npm start dan enter
 5. buka http://localhost:4200 di browser (prefer mozilla)

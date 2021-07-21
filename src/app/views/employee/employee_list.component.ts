@@ -255,7 +255,6 @@ export class EmployeeListComponent {
 		  }
 		  else if(result.length < this.perPage){
 			  this.maxPage = this.curPage;
-			  console.log(3333)
 			  this.nextPageBtn = false;
 			  let perPagination = this.curPage-this.perPagination;
 			  this.numbers = this.numbers.filter(function (val) { return val <= perPagination });
@@ -263,8 +262,7 @@ export class EmployeeListComponent {
 		  else if(this.begPage > this.maxPage){
 			  this.begPage = this.maxPage - this.perPage + 1;
 			  this.nextPageBtn = false;
-			  console.log(4444)
-		  }
+			  
 		  else if(this.begPage < 1){
 			  this.begPage = 1;
 			  this.maxPage = this.perPage;
@@ -280,9 +278,7 @@ export class EmployeeListComponent {
 			  this.prevPageBtn = false;
 		  }
 
-		   console.log(this.maxPage)
-		   console.log(this.begPage)
-		  this.spinnerHideShow="display:none"
+		   this.spinnerHideShow="display:none"
 		  
 		  
 		});	
@@ -302,7 +298,6 @@ export class EmployeeListComponent {
 		if(this.curPage !== this.maxPage){
 			this.nextPageBtn = true
 		}
-		console.log(this.nextPageBtn)
 		this.MyfetchData(pg);	
 		event.preventDefault();
 	}

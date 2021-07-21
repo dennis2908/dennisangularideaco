@@ -14,7 +14,11 @@
 	
 	Password : myconsole </br>
 	
-  - localhost harus terkoneksi dengan internet
+  - localhost harus terkoneksi dengan internet <br>
+  
+  - Untuk sorting dapat dilakukan dengan meng klik judul kolom Id, Username, First Name, Last Name <br>
+  
+  - Untuk searching dapat dilakukan dengan mengisi textbox di bawah judul kolom Username, First Name, Last Name <br>
 	
 	
 # Bukti running : (project angular ini yg sudah di deploy online)

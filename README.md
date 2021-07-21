@@ -1,4 +1,4 @@
-# Instalasi dan menjalankan server di localhost:
+# Instalasi dan menjalankan project di localhost:
 
 1. install angular 11.2.14
 2. git clone https://github.com/dennis2908/digimasterangularemployee

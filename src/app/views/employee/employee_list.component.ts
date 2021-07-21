@@ -262,7 +262,7 @@ export class EmployeeListComponent {
 		  else if(this.begPage > this.maxPage){
 			  this.begPage = this.maxPage - this.perPage + 1;
 			  this.nextPageBtn = false;
-			  
+		  }
 		  else if(this.begPage < 1){
 			  this.begPage = 1;
 			  this.maxPage = this.perPage;
@@ -278,7 +278,7 @@ export class EmployeeListComponent {
 			  this.prevPageBtn = false;
 		  }
 
-		   this.spinnerHideShow="display:none"
+		  this.spinnerHideShow="display:none"
 		  
 		  
 		});	

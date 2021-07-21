@@ -126,23 +126,6 @@ export class EmployeeListComponent {
 	    this.idDel = id;
 		this.modalRef = this.modalService.show(template);
    }
-
-   openModalAdd(template: TemplateRef<any>) {
-	  this.showGroupErrorMessage = false 
-	  this.modalType = "primary" 
-	  this.attemptSubmit = false;
-	  this.modalDataTitle = "Add Data Employee"
-	  this.modalBtn = "Create"
-	  this.modalRef = this.modalService.show(template); 
-	  this.formData = []
-	  this.initForm();
-	  Object.keys(this.userForm.controls).forEach(key => {
-			this.userForm.get(key).setErrors(null) ;
-	  });
-	  
-	  this.showModalAdd = true
-	  
-   }
    
    openModalAddEdit(data,modalType,modalDataTitle,modalBtn,showModalAdd,template: TemplateRef<any>) {
 	  this.showGroupErrorMessage = false 
@@ -162,23 +145,7 @@ export class EmployeeListComponent {
 	  this.showModalAdd = showModalAdd
 	  
    }
-   
-   openModalEdit(data,template: TemplateRef<any>) {
-	  this.showGroupErrorMessage = false 
-	  this.modalType = "warning"
-	  this.attemptSubmit = false;
-	  this.modalDataTitle = "Edit Data Employee"
-	  this.modalBtn = "Update"
-      this.modalRef = this.modalService.show(template);
-	  this.formData = data;
-	  this.initForm();
-	  Object.keys(this.userForm.controls).forEach(key => {
-			this.userForm.get(key).setErrors(null) ;
-	  });
-	  this.showModalAdd = false
-
-	  
-   }
+  
    
    openModalDetail(data,template: TemplateRef<any>) {
 	  this.showModalAdd = false

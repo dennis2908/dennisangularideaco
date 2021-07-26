@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "postinstall": "ngcc --properties es2015 browser module main --first-only",
-    "start:prod": "node server.js",
+    "start:prod": "node app.js",
     "build": "ng build --prod --aot --build-optimizer --common-chunk --vendor-chunk --optimization --progress",
     "test": "ng test",
     "lint": "ng lint",

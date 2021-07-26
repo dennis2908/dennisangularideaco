@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ActivatedRoute,Router,NavigationExtras } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators,FormGroupDirective } from '@angular/forms';
 
 import * as $ from 'jquery';
@@ -7,7 +8,7 @@ import * as $ from 'jquery';
 @Component({
   templateUrl: 'employee_list.component.html'
 })
-export class EmployeeListComponent {
+export class EmployeeListComponent{
 	
    curPage = 1;	
    
@@ -40,6 +41,19 @@ export class EmployeeListComponent {
    showGroupErrorMessage = false
    
    keyword = 'name';
+   formData:Array<any> =  [
+          {id : ""},
+		  {username : ""},
+		  {firstname : ""},
+		  {lastname : ""},
+		  {email : ""},
+		  {birthdate : ""},
+		  {basicsalary : ""},
+		  {status : ""},
+		  {birthdateM:""},
+		  {basicsalaryM:""},
+		  {groupdata : ""}
+	];
    public itemData = [
     {
       name: 'Junior Programmer',
@@ -88,20 +102,6 @@ export class EmployeeListComponent {
    dataLi=[];
    
    numbers:Array<any> = [];
-   
-   formData:Array<any> =  [
-          {id : ""},
-		  {username : ""},
-		  {firstname : ""},
-		  {lastname : ""},
-		  {email : ""},
-		  {birthdate : ""},
-		  {basicsalary : ""},
-		  {status : ""},
-		  {birthdateM:""},
-		  {basicsalaryM:""},
-		  {groupdata : ""}
-	];
 	
    searchData = { username : '', firstname : '', lastname : '' };
 	
@@ -115,7 +115,12 @@ export class EmployeeListComponent {
   
    userForm: FormGroup
    formDirective: FormGroupDirective
-   constructor(public formBuilder: FormBuilder,private modalService: BsModalService) {
+   constructor(private route: ActivatedRoute,private router: Router,public formBuilder: FormBuilder,private modalService: BsModalService) {
+	    if (this.router.getCurrentNavigation().extras.state) {
+        let data = this.router.getCurrentNavigation().extras.state.data;
+        this.searchData = data;
+        
+      }
 	   this.numbers = Array.from({length:this.perPagination},(v,k)=>k+1);
 	   this.MyfetchData(1);	
 	   this.searchData['namesort'] = "id"
@@ -145,6 +150,10 @@ export class EmployeeListComponent {
 	  this.showModalAdd = showModalAdd
 	  
    }
+   
+   formatRupiah(angka, prefix){	
+	return prefix+" "+ angka.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,").replace(".","-").replace(/,/g, '.').replace("-",",");
+  }
   
    
    openModalDetail(data,template: TemplateRef<any>) {
@@ -160,11 +169,7 @@ export class EmployeeListComponent {
 
 	  
    }
-   
-   formatRupiah(angka, prefix){	
-			return prefix+" "+ angka.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,").replace(".","-").replace(/,/g, '.').replace("-",",");
-		}
-
+  
    ngOnInit(): void { 
     this.initForm();
 	this.getTemplate();
@@ -192,6 +197,15 @@ export class EmployeeListComponent {
    
    get getControl(){
     return this.userForm.controls;
+  }
+  
+  searchPage(){
+	  
+		this.curPage = 1
+		this.begPage = 1
+		this.nextPageBtn = true
+		this.maxPage = this.perPagination
+		this.activePage(this.curPage,event) 
   }
   
    async MyfetchData(page) {   
@@ -258,24 +272,34 @@ export class EmployeeListComponent {
 			  this.nextPageBtn = false;
 			  let perPagination = this.curPage-this.perPagination;
 			  this.numbers = this.numbers.filter(function (val) { return val <= perPagination });
+			  if(this.begPage === this.maxPage){
+				this.prevPageBtn = false;
+			  }
 		  }
 		  else if(this.begPage > this.maxPage){
+			  
 			  this.begPage = this.maxPage - this.perPage + 1;
 			  this.nextPageBtn = false;
 		  }
 		  else if(this.begPage < 1){
+			 
 			  this.begPage = 1;
 			  this.maxPage = this.perPage;
 			  this.nextPageBtn = true;
 		  }
 		  else if(this.begPage === this.maxPage){
-			  this.perPagination = 1;
-			  let perPagination = this.maxPage
+			  //this.perPagination = 1;
+			   console.log(3213123)
+			   let perPagination = this.maxPage
+			   this.prevPageBtn = false;
 			 
 			  this.numbers = this.numbers.filter(function (val) { return val <= perPagination });
 		  }
-		  else if(this.curPage === 1){
+		  else if(this.maxPage === 1){
 			  this.prevPageBtn = false;
+			  console.log(313123)
+			  
+			  
 		  }
 
 		  this.spinnerHideShow="display:none"

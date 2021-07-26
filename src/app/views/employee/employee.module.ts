@@ -63,7 +63,7 @@ import { EmployeeListComponent } from './employee_list.component';
 	AgGridModule.withComponents([]) 
   ],
   declarations: [
-   EmployeeListComponent
+   EmployeeListComponent,
   ]
 })
 export class EmployeeModule { }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeListComponent } from './employee_list.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -20,7 +19,7 @@ const routes: Routes = [
         data: {
           title: 'Employee User'
         }
-      } 	  
+      }	  
     ]
   }
 ];

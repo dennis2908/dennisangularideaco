@@ -136,7 +136,7 @@
 		   </div>
 		   <div class="modal-body bg-success">
 			  <div class="card-body">
-          <form [formGroup]="userForm" (ngSubmit)="onSubmit($event)" novalidate>
+          <form>
             <div class="form-group">
               <label class="form-col-form-label" >Username</label>
 			  <label class="form-control" >{{formData.username}}</label>
@@ -228,9 +228,9 @@
 			    <th></th>
 				<th></th>
                 <th></th>
-                <th><input type="text" class="form-control" [(ngModel)]="this.searchData.username" (keyup)="MyfetchData(1)"></th>
-                <th><input type="text" class="form-control" [(ngModel)]="this.searchData.firstname" (keyup)="MyfetchData(1)"></th>
-				<th><input type="text" class="form-control" [(ngModel)]="this.searchData.lastname" (keyup)="MyfetchData(1)"></th>
+                <th><input type="text" class="form-control" [(ngModel)]="this.searchData.username" (keyup)="searchPage()"></th>
+                <th><input type="text" class="form-control" [(ngModel)]="this.searchData.firstname" (keyup)="searchPage()"></th>
+				<th><input type="text" class="form-control" [(ngModel)]="this.searchData.lastname" (keyup)="searchPage()"></th>
 				<th></th>
 				<th></th>
 				<th></th>

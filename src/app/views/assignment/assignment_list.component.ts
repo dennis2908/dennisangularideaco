@@ -340,7 +340,7 @@ export class AssignmentListComponent{
 			//console.log(evt)
 			let selemployee = this.m_employee.filter(function (selemployee) { return selemployee.id == evt });
 			if(selemployee.length > 0){
-			console.log(selemployee)
+			console.log(22222,selemployee)
 			//this.arrEmplPos[i]=selemployee[0]['groupdata']
 	//evt.preventDefault()
 	//let emp_id = evt.target.value.split(':')[1].replace(/\s+/g, '')

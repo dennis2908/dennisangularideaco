@@ -197,6 +197,30 @@
 													(click)="makeAssignData('userdelete',$event)"
 													class="list-group-item text-dark bg-white list-group-item-action">Button
 													Delete User</a>
+												<a *ngIf="dataAssign['employeeadd']"
+													(click)="makeAssignData('employeeadd',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Add Employee</a>
+												<a *ngIf="!dataAssign['employeeadd']"
+													(click)="makeAssignData('employeeadd',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Add Employee</a>
+												<a *ngIf="dataAssign['employeeedit']"
+													(click)="makeAssignData('employeeedit',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Edit Employee</a>
+												<a *ngIf="!dataAssign['employeeedit']"
+													(click)="makeAssignData('employeeedit',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Edit Employee</a>
+												<a *ngIf="dataAssign['employeedelete']"
+													(click)="makeAssignData('employeedelete',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Delete Employee</a>
+												<a *ngIf="!dataAssign['employeedelete']"
+													(click)="makeAssignData('employeedelete',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Delete Employee</a>
 											</div>
 										</form>
 									</div>

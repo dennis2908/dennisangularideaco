@@ -178,12 +178,12 @@ export class BranchListComponent{
 	await fetch(url)
       .then(res => res.json())
       .then(
-        (result) => {
+        async (result) => {
 		  this.spinnerHideShow="display:block"	
 		  let Datalist = []
 		  for (var i = 0; i < result.length; i++) {
 			   if(result[i]['birthdate']){
-			    var mydate = new Date(result[i]['birthdate']);
+			    var mydate = await new Date(result[i]['birthdate']);
 				var month = ("0" + (mydate.getMonth() + 1)).slice(-2)
 				var day = ("0" + mydate.getDate()).slice(-2)
 				var year = mydate.getFullYear();
@@ -196,7 +196,7 @@ export class BranchListComponent{
 			   }
 				
 		  }
-		  this.data = result;
+		  this.data = await result;
 		  
 		  if(result.length === 0){
 			  if(this.curPage !== 1){

@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
 <div class="card-header bg-info">
-          <i class="fa fa-align-justify"></i> <button (click)="openModalAddEdit('','primary','Add Data User','Create',true,template)" type="button" class="btn btn-primary btn-small"><i class="cil-user-plus"></i>  Add New User</button>
+          <i class="fa fa-align-justify"></i> <button (click)="openModalAddEdit('','primary','Add Data User','Create',true,template)" type="button" class="btn btn-primary btn-small" *ngIf="btnadd"><i class="cil-user-plus"></i>  Add New User</button>
         </div>
   <div class="row" style="overflow-x: scroll;">
     <div class="col">
@@ -179,7 +179,7 @@
             <tbody>
 			  <tr *ngFor = "let x of data ; let i = index" [attr.data-index]="i">
 				 <td>{{(perPage*(curPage-1))+i+1}}</td>
-				 <td width="270"><button (click)="openModalDetail(x,templateDetail)" type="button" class="btn btn-success btn-small mr-2"> <i class="cil-library"></i> Detail</button><button (click)="openModalAddEdit(x,'warning','Edit Data User','Update',false,template)" type="button" class="btn btn-warning btn-small mr-2"> <i class="cil-pencil"></i> Edit</button><button (click)="openModalConfirm(x.id,templateConfirm)" type="button" class="btn btn-danger btn-small"> <i class="cil-trash"></i>  Delete</button></td>
+				 <td width="270"><button (click)="openModalDetail(x,templateDetail)" type="button" class="btn btn-success btn-small mr-2"> <i class="cil-library"></i> Detail</button><button (click)="openModalAddEdit(x,'warning','Edit Data User','Update',false,template)" type="button" class="btn btn-warning btn-small mr-2" *ngIf="btnedit"> <i class="cil-pencil"></i> Edit</button><button (click)="openModalConfirm(x.id,templateConfirm)" type="button" class="btn btn-danger btn-small" *ngIf="btndelete"> <i class="cil-trash"></i>  Delete</button></td>
 				 <td>{{x.id}}</td>
 				 <td>{{x.username}}</td>
 				 <td>{{x.name}}</td>

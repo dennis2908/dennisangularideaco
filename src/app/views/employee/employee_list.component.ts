@@ -109,7 +109,7 @@ export class EmployeeListComponent{
   
    attemptSubmit
    
-   spinnerHideShow = "display:block"
+   spinnerHideShow = ""
   
    regUrl = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';	
   
@@ -216,7 +216,7 @@ export class EmployeeListComponent{
 				 .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(this.searchData[k]))
 				 .join('&');
 
-	let url = "https://angulardennis.herokuapp.com/crud/get_data/"+(this.perPage*(page-1))+'/'+this.perPage+"/"+this.sort_id +"?"+ query;
+	let url = "http://localhost:8000/crud/get_data/"+(this.perPage*(page-1))+'/'+this.perPage+"/"+this.sort_id +"?"+ query;
 	await fetch(url)
       .then(res => res.json())
       .then(
@@ -379,7 +379,7 @@ export class EmployeeListComponent{
 	deleteItem(event){
 		this.spinnerHideShow = "display:block"
 		event.preventDefault();
-		fetch("https://angulardennis.herokuapp.com/crud/delete_data/"+this.idDel, {
+		fetch("http://localhost:8000/crud/delete_data/"+this.idDel, {
 						  method: "DELETE",
 						  headers: {
 							  'Accept': 'application/json',
@@ -431,7 +431,7 @@ export class EmployeeListComponent{
 		this.spinnerHideShow = "display:block"
 		this.attemptSubmit = false
 		if(this.userForm.controls['id'].value){
-			fetch("https://angulardennis.herokuapp.com/crud/update_data/"+this.userForm.controls['id'].value, {
+			fetch("http://localhost:8000/crud/update_data/"+this.userForm.controls['id'].value, {
 						  method: "PUT",
 						  headers: {
 							  'Accept': 'application/json',
@@ -451,7 +451,7 @@ export class EmployeeListComponent{
 		else
 		{
 				
-			fetch("https://angulardennis.herokuapp.com/crud/save_data", {
+			fetch("http://localhost:8000/crud/save_data", {
 						  method: "POST",
 						  headers: {
 							  'Accept': 'application/json',

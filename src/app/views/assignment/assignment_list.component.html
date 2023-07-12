@@ -1,0 +1,189 @@
+<div class="animated fadeIn">
+<div class="card-header bg-info">
+          <i class="fa fa-align-justify"></i> <button (click)="openModalAddEdit('','primary','Add Data Assignment','Create',true,template)" type="button" class="btn btn-primary btn-small"><i class="cil-spreadsheet"></i>  Add New Assignment</button>
+        </div>
+  <div class="row" style="overflow-x: scroll;">
+    <div class="col">
+      <div class="card">
+       <div class="row" style="width:1000px;">
+    <div class="col">
+      <div class="card">
+        
+		<ng-template #template>
+		   <div class="modal-header bg-{{modalType}}">
+			  <h4 class="modal-title pull-left"><i class="cil-spreadsheet"></i> {{modalDataTitle}}</h4><div class="spinner-grow text-primary ml-2" style="{{spinnerHideShow || 'display:block'}}" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+			  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+				 <span aria-hidden="true">×</span>
+			  </button>
+		   </div>
+		   <div class="modal-body bg-{{modalType}}">
+			  <div class="card-body">
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit($event)" autocomplete="off" novalidate>
+            <div class="form-group">
+              <label class="form-col-form-label" >Assignment Name</label>
+              <input type="text" class="form-control" name="assignment_name" formControlName="assignment_name" [(ngModel)]="formData.assignment_name">
+			  <input type="hidden" class="form-control" formControlName="id" [(ngModel)]="formData.id">
+            </div>
+			<div class="form-group">
+				<label class="form-col-form-label" >Company</label>
+								<select formControlName="m_company" class="form-control" [(ngModel)]="formData.m_company">
+  
+								  <option [value]='' disabled>Choose Company</option>
+  
+								  <option *ngFor="let company of m_company"  [value]="company.id">{{company.company_name}}</option>
+  
+							  </select>
+			   </div>
+			   
+			   <div *ngIf="getControl.m_company.invalid && (getControl.m_company.dirty || getControl.m_company.touched) || (getControl.m_company.untouched && attemptSubmit)" class="alert alert-danger">
+					<div *ngIf="getControl.m_company.errors?.required">Company is required.</div>
+			  </div>
+			<div *ngIf="getControl.assignment_name.invalid && (getControl.assignment_name.dirty || getControl.assignment_name.touched) || (getControl.assignment_name.untouched && attemptSubmit)" class="alert alert-danger">
+				  <div *ngIf="getControl.assignment_name.errors?.required">Assignment Name is required.</div>
+				  <div *ngIf="getControl.assignment_name.errors?.minlength">Minimum 3 character are required.</div>
+			</div>
+
+			<div class="form-group">
+				<label class="form-col-form-label" >PIC</label>
+				<input type="text" class="form-control" name="pic" formControlName="pic" [(ngModel)]="formData.pic">
+			  </div>
+			  <div *ngIf="getControl.pic.invalid && (getControl.pic.dirty || getControl.pic.touched) || (getControl.pic.untouched && attemptSubmit)" class="alert alert-danger">
+					<div *ngIf="getControl.pic.errors?.required">PIC is required.</div>
+					<div *ngIf="getControl.pic.errors?.minlength">Minimum 3 character are required.</div>
+			  </div>
+
+			<div class="form-group">
+				<button type = "button" (click)="incemplnumbers()" class="btn btn-info px-4"><i class="cil-plus"></i> Add New Employee</button>
+			  </div>
+
+			<div *ngFor="let xxx of emplnumbers; index as i; first as isFirst">
+				  <div class="form-group" *ngIf="arrRemAss.indexOf(i) === -1 " >
+					<div class="row ml-1" *ngIf="formData.employee!=={}">
+						<select *ngIf="formData.employee[i];else emp_id" id="selChDoc{{i}}" (change)="assArrEmplPosChange(i,$event)" (ngModelChange)="assArrEmplPos(i,formData.employee[i])" formControlName="m_employee" class="form-control col-sm-5 mr-1" [ngModel]="formData.employee[i]">
+							<option [value]='' disabled>Choose Employee</option>
+							<option *ngFor="let employee of m_employee" [value]="employee.id" [selected]="employee.id == arrEmplId[i]">{{employee.username}}</option>	
+						</select>
+					    <input type="text" *ngIf="arrEmplId[i];else empEmp_id"  (ngModelChange)="changeselData(i)"  value="{{arrEmplPos[i]}}" class="form-control col-sm-5 mr-1" disabled/>
+						<ng-template #emp_id>
+							<select (ngModelChange)="assArrEmplPos(i,$event)" id="selChDoc{{i}}" (change)="assArrEmplPosChange(i,$event)" (ngModelChange)="assArrEmplPos(i,formData.employee[i])"  formControlName="m_employee" class="form-control col-sm-5 mr-1" [ngModel]="formData.employee[i]">
+  
+								<option [value]='' disabled>Choose Employee</option>
+	
+								<option *ngFor="let employee of m_employee" [value]="employee.id">{{employee.username}}</option>
+	
+							</select>
+						</ng-template>
+						<ng-template #empEmp_id>
+							<input type="text" class="form-control col-sm-5 mr-1"  id="selHid{{i}}"  value="{{arrEmplPos[i]}}" disabled required />
+						</ng-template>
+						<button *ngIf="i>0" type = "button" (click)="removeEmplnumbers(i)" class="btn btn-info col-sm-1">X</button>
+					</div> 
+				  </div>
+			</div>
+
+	    	<div class="form-group">
+              <button type = "submit" class="btn btn-info px-4"><i class="cil-check-alt"></i> {{modalBtn}} </button>
+            </div>
+          </form>
+        </div>
+		   </div>
+		   <div class="modal-footer bg-{{modalType}}">
+			  <button type="button" class="btn btn-secondary" (click)="modalRef.hide()"><i class="cil-x"></i> Close</button>
+		   </div>
+		</ng-template>
+		
+		<ng-template #templateDetail>
+		   <div class="modal-header bg-success">
+			  <h4 class="modal-title pull-left"><i class="cil-spreadsheet"></i> Data Detail Branch</h4><div class="spinner-grow text-primary ml-2" style="{{spinnerHideShow || 'display:block'}}" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+			  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+				 <span aria-hidden="true">×</span>
+			  </button>
+		   </div>
+		   <div class="modal-body bg-success">
+			  <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label class="form-col-form-label" >Branch Name</label>
+			  <label class="form-control" >{{formData.branch_name}}</label>
+             </div>
+
+          </form>
+        </div>
+		   </div>
+		   <div class="modal-footer bg-success">
+			  <button type="button" class="btn btn-secondary" (click)="modalRef.hide()"><i class="cil-x"></i> Close</button>
+		   </div>
+		</ng-template>
+		
+		<ng-template #templateConfirm>
+		  <div class="modal-header bg-danger">
+			<h4 class="modal-title pull-left">Confirmation</h4><div class="spinner-border text-success ml-3" role="status" style="{{spinnerHideShow || 'display:block'}}">
+  <span class="sr-only">Loading...</span>
+</div>
+			<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			Are you want to delete this item ?
+		  </div>
+		  <div class="modal-footer">
+		      <button type = "submit" class="btn btn-danger" (click)="deleteItem($event)"><i class="cil-check"></i> Confirm</button>
+			  <button type="button" class="btn btn-secondary" (click)="modalRef.hide()"><i class="cil-x"></i> Cancel</button>
+		   </div>
+		</ng-template>
+        <div class="card-body">
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+			    <th>No</th>
+				<th>Action</th>
+                <th><a (click)="sortData('id',$event)" href="#">Id</a></th>
+                <th><a (click)="sortData('company_name',$event)" href="#">Company Name</a></th>
+				<th><a (click)="sortData('pic',$event)" href="#">PIC</a></th>
+				<th><a (click)="sortData('assignment_name',$event)" href="#">Assignment Name</a></th>
+              </tr>
+			  <tr>
+			    <th></th>
+				<th></th>
+                <th></th>
+                <th><input type="text" class="form-control" [(ngModel)]="this.searchData.company_name" (keyup)="searchPage()"></th>
+				<th><input type="text" class="form-control" [(ngModel)]="this.searchData.pic" (keyup)="searchPage()"></th>
+				<th><input type="text" class="form-control" [(ngModel)]="this.searchData.assignment_name" (keyup)="searchPage()"></th>
+              </tr>
+            </thead>
+            <tbody>
+			  <tr *ngFor = "let x of data ; let i = index" [attr.data-index]="i">
+				 <td>{{(perPage*(curPage-1))+i+1}}</td>
+				 <td width="270"><button (click)="openModalDetail(x,templateDetail)" type="button" class="btn btn-success btn-small mr-2"> <i class="cil-library"></i> Detail</button><button (click)="openModalAddEdit(x,'warning','Edit Data Assignment','Update',false,template)" type="button" class="btn btn-warning btn-small mr-2"> <i class="cil-pencil"></i> Edit</button><button (click)="openModalConfirm(x.id,templateConfirm)" type="button" class="btn btn-danger btn-small"> <i class="cil-trash"></i>  Delete</button></td>
+				 <td>{{x.id}}</td>
+				 <td>{{x.company_name}}</td>
+				 <td>{{x.pic}}</td>
+				 <td>{{x.assignment_name}}</td>
+				 </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination">
+              <li *ngIf="prevPageBtn" class="page-item"><a class="page-link" (click)="prevPage($event)" href="#">Prev</a></li>
+			  <div *ngFor="let xxx of numbers; index as i; first as isFirst">
+			     <li (click)="activePage((begPage+xxx-1),$event)" *ngIf="(begPage+xxx-1)===curPage && i <= maxPage" class="page-item active"><a class="page-link" href="#">{{begPage+xxx-1}}</a></li>
+				 <li (click)="activePage((begPage+xxx-1),$event)" *ngIf="(begPage+xxx-1)!==curPage && i <= maxPage" class="page-item"><a class="page-link" href="#">{{begPage+xxx-1}}</a></li>
+			  </div>
+              <li *ngIf="nextPageBtn" class="page-item"><a class="page-link" href="#" (click)="nextPage($event)">Next</a></li>
+			  <li class="page-item"><div class="spinner-border text-success ml-3" role="status" style="{{spinnerHideShow || 'display:block'}}">
+  <span class="sr-only">Loading...</span>
+</div></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>

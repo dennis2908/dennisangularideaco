@@ -14,7 +14,7 @@ export class DefaultLayoutComponent {
     this.sidebarMinimized = e;
   }
   logout(){
-	   localStorage.removeItem('angularData');
+	   localStorage.removeItem('angularJS');
 	   console.log(323122313)
 	   //window.location.reload();
 	   window.location.href="../"

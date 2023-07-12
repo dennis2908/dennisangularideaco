@@ -15,6 +15,10 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 
+import { StoreModule } from "@ngrx/store";
+
+import { reducer } from './redux/storeLogin';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -67,6 +71,7 @@ import { ChartsModule } from 'ng2-charts';
     IconModule,
 	HttpClientModule,
     IconSetModule.forRoot(),
+	StoreModule.forRoot({cart: reducer})
   ],
   declarations: [
     AppComponent,

@@ -11,7 +11,7 @@
                   <p class="text-muted">Sign In to your account</p>
             <div class="form-group">
               <label class="form-col-form-label" for="inputError2">Username</label>
-              <input type="text" class="form-control" minlength="3" [(ngModel)]="myform.username" [ngModelOptions]="{standalone: true}" required>
+              <input type="text" class="form-control" minlength="3" [(ngModel)]="myform.username" autocomplete="false" [ngModelOptions]="{standalone: true}" required>
               <div class="valid-feedback">
                 Input is valid.
               </div>

@@ -406,7 +406,7 @@ export class UserListComponent {
 
 	}
 
-	onSubmit(event: any) {
+	async onSubmit(event: any) {
 		if (this.showModalAdd) {
 			this.attemptSubmit = true
 			this.showGroupErrorMessage = true
@@ -425,7 +425,7 @@ export class UserListComponent {
 			this.spinnerHideShow = "display:block"
 			this.attemptSubmit = false
 			if (this.userForm.controls['id'].value) {
-				fetch("http://localhost:8000/user/update_data/" + this.userForm.controls['id'].value, {
+				await fetch("http://localhost:8000/user/update_data/" + this.userForm.controls['id'].value, {
 					method: "PUT",
 					headers: {
 						'Accept': 'application/json',
@@ -433,14 +433,10 @@ export class UserListComponent {
 						'Access-Control-Allow-Headers': '*'
 					},
 					body: JSON.stringify(formData)
-				}).then(res => res.json())
-					.then(
-						async (result) => {
-							await this.activePage(this.curPage, event)
-							await this.modalRef.hide()
+				});
+				await this.activePage(this.curPage, event)
+				this.modalRef.hide()
 
-
-						});
 			}
 			else {
 

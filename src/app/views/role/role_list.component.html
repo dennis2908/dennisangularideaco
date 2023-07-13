@@ -221,6 +221,80 @@
 													(click)="makeAssignData('employeedelete',$event)"
 													class="list-group-item text-dark bg-white list-group-item-action">Button
 													Delete Employee</a>
+												<a *ngIf="dataAssign['branchadd']"
+													(click)="makeAssignData('branchadd',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Add Branch</a>
+												<a *ngIf="!dataAssign['branchadd']"
+													(click)="makeAssignData('branchadd',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Add Branch</a>
+												<a *ngIf="dataAssign['branchedit']"
+													(click)="makeAssignData('branchedit',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Edit Branch</a>
+												<a *ngIf="!dataAssign['branchedit']"
+													(click)="makeAssignData('branchedit',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Edit Branch</a>
+												<a *ngIf="dataAssign['branchdelete']"
+													(click)="makeAssignData('branchdelete',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Delete Branch</a>
+												<a *ngIf="!dataAssign['branchdelete']"
+													(click)="makeAssignData('branchdelete',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Delete Branch</a>
+
+												<a *ngIf="dataAssign['companyadd']"
+													(click)="makeAssignData('companyadd',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Add Company</a>
+												<a *ngIf="!dataAssign['companyadd']"
+													(click)="makeAssignData('companyadd',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Add Company</a>
+												<a *ngIf="dataAssign['companyedit']"
+													(click)="makeAssignData('companyedit',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Edit Company</a>
+												<a *ngIf="!dataAssign['companyedit']"
+													(click)="makeAssignData('companyedit',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Edit Company</a>
+												<a *ngIf="dataAssign['companydelete']"
+													(click)="makeAssignData('companydelete',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Delete Company</a>
+												<a *ngIf="!dataAssign['companydelete']"
+													(click)="makeAssignData('companydelete',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Delete Company</a>
+
+												<a *ngIf="dataAssign['assignmentadd']"
+													(click)="makeAssignData('assignmentadd',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Add Assignment</a>
+												<a *ngIf="!dataAssign['assignmentadd']"
+													(click)="makeAssignData('assignmentadd',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Add Assignment</a>
+												<a *ngIf="dataAssign['assignmentedit']"
+													(click)="makeAssignData('assignmentedit',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Edit Assignment</a>
+												<a *ngIf="!dataAssign['assignmentedit']"
+													(click)="makeAssignData('assignmentedit',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Edit Assignment</a>
+												<a *ngIf="dataAssign['assignmentdelete']"
+													(click)="makeAssignData('assignmentdelete',$event)"
+													class="list-group-item text-dark bg-primary list-group-item-action">Button
+													Delete Assignment</a>
+												<a *ngIf="!dataAssign['assignmentdelete']"
+													(click)="makeAssignData('assignmentdelete',$event)"
+													class="list-group-item text-dark bg-white list-group-item-action">Button
+													Delete Assignment</a>
 											</div>
 										</form>
 									</div>

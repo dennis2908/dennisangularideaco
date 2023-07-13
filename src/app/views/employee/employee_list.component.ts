@@ -426,7 +426,7 @@ export class EmployeeListComponent {
 
 	}
 
-	onSubmit(event: any) {
+	async onSubmit(event: any) {
 		if (this.showModalAdd) {
 			this.attemptSubmit = true
 			this.showGroupErrorMessage = true
@@ -460,7 +460,7 @@ export class EmployeeListComponent {
 			this.spinnerHideShow = "display:block"
 			this.attemptSubmit = false
 			if (this.userForm.controls['id'].value) {
-				fetch("http://localhost:8000/crud/update_data/" + this.userForm.controls['id'].value, {
+				await fetch("http://localhost:8000/crud/update_data/" + this.userForm.controls['id'].value, {
 					method: "PUT",
 					headers: {
 						'Accept': 'application/json',
@@ -468,18 +468,14 @@ export class EmployeeListComponent {
 						'Access-Control-Allow-Headers': '*'
 					},
 					body: JSON.stringify(formData)
-				}).then(res => res.json())
-					.then(
-						(result) => {
-							this.activePage(this.curPage, event)
-							this.modalRef.hide()
+				});
+				this.activePage(this.curPage, event)
+				this.modalRef.hide()
 
-
-						});
 			}
 			else {
 
-				fetch("http://localhost:8000/crud/save_data", {
+				await fetch("http://localhost:8000/crud/save_data", {
 					method: "POST",
 					headers: {
 						'Accept': 'application/json',
@@ -489,8 +485,8 @@ export class EmployeeListComponent {
 					body: JSON.stringify(formData)
 				}).then(res => res.json())
 					.then(
-						(result) => {
-							this.searchData['namesort'] = "id"
+						async (result) => {
+							this.searchData['namesort'] = await "id"
 							this.searchData['ascdesc'] = "1"
 							this.curPage = 1
 							this.begPage = 1

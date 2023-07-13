@@ -25,10 +25,10 @@ export class SigninComponent {
 	async onSubmit(event) {
 		event.preventDefault()
 
-		console.log(23123132);
+		console.log(23123132,this.myform.password.length);
 		//this.attemptSubmit = true
 
-		if (this.myform.username && this.myform.password) {
+		if (this.myform.username && this.myform.password && this.myform.username.length > 2 && this.myform.password.length > 6) {
 
 			fetch("http://localhost:8000/user/doLogin", {
 				method: "POST",
